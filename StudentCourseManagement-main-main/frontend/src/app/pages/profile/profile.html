@@ -1,0 +1,150 @@
+<div class="profile-page">
+<app-navbar></app-navbar>
+  <div class="profile-container">
+
+    <div class="profile-header">
+
+      <div class="profile-avatar">
+  <img *ngIf="user?.avatar" [src]="user.avatar" class="profile-avatar-img">
+  <i *ngIf="!user?.avatar" class="bi bi-person-fill"></i>
+</div>
+      <div>
+        <h1>My Profile</h1>
+        <p>View and manage your personal information</p>
+      </div>
+
+    </div>
+
+
+    <!-- Loading -->
+
+    <div
+      *ngIf="loading"
+      class="loading"
+    >
+      <i class="bi bi-arrow-repeat"></i>
+      Loading profile...
+    </div>
+
+
+    <!-- Error -->
+
+    <div
+      *ngIf="errorMsg && !loading"
+      class="error-message"
+    >
+      <i class="bi bi-exclamation-circle"></i>
+
+      {{ errorMsg }}
+    </div>
+
+
+    <!-- Profile -->
+
+    <div
+      *ngIf="user && !loading"
+      class="profile-card"
+    >
+
+      <div class="info-row">
+
+        <div class="info-icon">
+          <i class="bi bi-person"></i>
+        </div>
+
+        <div class="info-content">
+
+          <span>Name</span>
+
+          <strong>
+            {{ user.name }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <div class="info-icon">
+          <i class="bi bi-envelope"></i>
+        </div>
+
+        <div class="info-content">
+
+          <span>Email</span>
+
+          <strong>
+            {{ user.email }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <div class="info-icon">
+          <i class="bi bi-calendar"></i>
+        </div>
+
+        <div class="info-content">
+
+          <span>Age</span>
+
+          <strong>
+            {{ user.age }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <div class="info-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+
+        <div class="info-content">
+
+          <span>Role</span>
+
+          <strong>
+            {{ user.role }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="profile-actions">
+
+        <a
+          routerLink="/editprofile"
+          class="btn btn-primary"
+        >
+          <i class="bi bi-pencil"></i>
+          Edit Profile
+        </a>
+
+
+        <a
+          routerLink="/change-password"
+          class="btn btn-secondary"
+        >
+          <i class="bi bi-key"></i>
+          Change Password
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

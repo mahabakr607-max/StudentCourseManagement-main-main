@@ -1,0 +1,362 @@
+<div class="container-fluid min-vh-100">
+
+  <div class="row min-vh-100">
+
+    <!-- Left Side -->
+    <div class="col-lg-6 d-none d-lg-flex bg-primary text-white
+             align-items-center justify-content-center">
+
+      <div class="text-center px-5">
+
+        <i class="bi bi-person-plus-fill display-1 mb-4"></i>
+
+        <h1 class="fw-bold display-5">
+          Join Our Platform
+        </h1>
+
+        <p class="lead mt-3">
+          Create your account and start learning new skills today.
+        </p>
+
+        <div class="mt-4">
+
+          <span class="badge bg-light text-primary fs-6 me-2 p-2">
+            <i class="bi bi-book me-1"></i>
+            Courses
+          </span>
+
+          <span class="badge bg-light text-primary fs-6 me-2 p-2">
+            <i class="bi bi-award me-1"></i>
+            Certificates
+          </span>
+
+          <span class="badge bg-light text-primary fs-6 me-2 p-2">
+            <i class="bi bi-people me-1"></i>
+            Community
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="col-12 col-lg-6 d-flex
+             align-items-center justify-content-center
+             bg-light">
+
+      <div class="w-100 px-4 py-4" style="max-width: 500px;">
+
+        <!-- Header -->
+
+        <div class="text-center mb-4">
+
+          <div class="bg-primary text-white rounded-circle
+                   d-inline-flex align-items-center
+                   justify-content-center mb-3" style="width: 65px; height: 65px;">
+
+            <i class="bi bi-person-plus fs-2"></i>
+
+          </div>
+
+          <h2 class="fw-bold">
+            Create Account
+          </h2>
+
+          <p class="text-muted">
+            Register and start your learning journey
+          </p>
+
+        </div>
+
+        <!-- Register Form -->
+
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+          <!-- Name -->
+
+          <div class="mb-3">
+
+            <label class="form-label fw-semibold">
+              Name
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-person text-primary"></i>
+              </span>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                placeholder="Enter your name"
+                #nameInput
+                (keydown.enter)="$event.preventDefault(); emailInput.focus()">
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+                registerForm.get('name')?.invalid &&
+                registerForm.get('name')?.touched
+              ">
+
+              <small *ngIf="
+                  registerForm.get('name')?.errors?.['required']
+                ">
+                Name is required
+              </small>
+
+              <small *ngIf="
+                  registerForm.get('name')?.errors?.['minlength']
+                ">
+                Name must be at least 3 characters
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Email -->
+
+          <div class="mb-3">
+
+            <label class="form-label fw-semibold">
+              Email
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-envelope text-primary"></i>
+              </span>
+
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Enter your email"
+                #emailInput
+                (keydown.enter)="$event.preventDefault(); ageInput.focus()">
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+                registerForm.get('email')?.invalid &&
+                registerForm.get('email')?.touched
+              ">
+
+              <small *ngIf="
+                  registerForm.get('email')?.errors?.['required']
+                ">
+                Email is required
+              </small>
+
+              <small *ngIf="
+                  registerForm.get('email')?.errors?.['email']
+                ">
+                Enter a valid email
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Age -->
+
+          <div class="mb-3">
+
+            <label class="form-label fw-semibold">
+              Age
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-calendar text-primary"></i>
+              </span>
+
+              <input
+                type="number"
+                class="form-control"
+                formControlName="age"
+                placeholder="Enter your age"
+                #ageInput
+                (keydown.enter)="$event.preventDefault(); passwordInput.focus()">
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+                registerForm.get('age')?.invalid &&
+                registerForm.get('age')?.touched
+              ">
+
+              <small *ngIf="
+                  registerForm.get('age')?.errors?.['required']
+                ">
+                Age is required
+              </small>
+
+              <small *ngIf="
+                  registerForm.get('age')?.errors?.['min']
+                ">
+                Age must be greater than 0
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Password -->
+
+          <div class="mb-3">
+
+            <label class="form-label fw-semibold">
+              Password
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-lock text-primary"></i>
+              </span>
+
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                formControlName="password"
+                placeholder="Enter your password"
+                #passwordInput
+                (keydown.enter)="$event.preventDefault(); confirmPasswordInput.focus()">
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="togglePassword()">
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!showPassword"
+                  [class.bi-eye-slash]="showPassword">
+                </i>
+
+              </button>
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            ">
+
+              <small *ngIf="
+                registerForm.get('password')?.errors?.['required']
+              ">
+                Password is required
+              </small>
+
+              <small *ngIf="
+                registerForm.get('password')?.errors?.['minlength']
+              ">
+                Password must be at least 6 characters
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Confirm Password -->
+
+          <div class="mb-4">
+
+            <label class="form-label fw-semibold">
+              Confirm Password
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-shield-lock text-primary"></i>
+              </span>
+
+              <input
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                class="form-control"
+                formControlName="confirmpassword"
+                placeholder="Confirm your password"
+                #confirmPasswordInput>
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="toggleConfirmPassword()">
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!showConfirmPassword"
+                  [class.bi-eye-slash]="showConfirmPassword">
+                </i>
+
+              </button>
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+              registerForm.get('confirmpassword')?.invalid &&
+              registerForm.get('confirmpassword')?.touched
+            ">
+
+              <small *ngIf="
+                registerForm.get('confirmpassword')?.errors?.['required']
+              ">
+                Confirm password is required
+              </small>
+
+              <small *ngIf="
+                registerForm.get('confirmpassword')?.errors?.['minlength']
+              ">
+                Confirm password must be at least 6 characters
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Register Button -->
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 py-2 fw-semibold"
+            [disabled]="registerForm.invalid">
+
+            <i class="bi bi-person-plus me-2"></i>
+
+            Create Account
+
+          </button>
+
+          <!-- Login -->
+
+          <p class="text-center text-muted mt-4 mb-0">
+
+            Already have an account?
+
+            
+             <a routerLink="/login"
+              class="text-primary fw-semibold text-decoration-none">
+              Login
+            </a>
+
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

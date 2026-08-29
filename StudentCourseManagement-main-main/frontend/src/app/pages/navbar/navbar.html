@@ -1,0 +1,43 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <button type="button" class="back-btn" (click)="goBack()" aria-label="Go back"><i class="bi bi-arrow-left"></i></button>
+    <div class="logo">Student Course Management</div>
+  </div>
+
+  <div class="nav-links">
+    <a [routerLink]="homeLink">Home</a>
+    <a routerLink="/courses">Courses</a>
+  </div>
+
+  <div class="profile-menu-wrapper">
+    <button type="button" class="profile-btn" (click)="toggleMenu()" aria-label="Open profile menu">
+      <img *ngIf="avatarUrl" [src]="avatarUrl" class="profile-avatar-img">
+      <span *ngIf="!avatarUrl" class="profile-avatar-fallback">{{ initials }}</span>
+    </button>
+
+    <div class="profile-dropdown" *ngIf="menuOpen">
+
+      <div class="dropdown-header">
+        <img *ngIf="avatarUrl" [src]="avatarUrl" class="dropdown-avatar-img">
+        <span *ngIf="!avatarUrl" class="dropdown-avatar-fallback">{{ initials }}</span>
+
+        <div class="dropdown-user-info">
+          <strong>{{ userName || 'My Account' }}</strong>
+          <small>{{ userEmail }}</small>
+        </div>
+      </div>
+
+      <a routerLink="/profile" (click)="closeMenu()"><i class="bi bi-person"></i> My Profile</a>
+      <a routerLink="/editprofile" (click)="closeMenu()"><i class="bi bi-pencil-square"></i> Edit Profile</a>
+      <a routerLink="/my-courses" (click)="closeMenu()"><i class="bi bi-journal-bookmark"></i> My Courses</a>
+      <a routerLink="/change-password" (click)="closeMenu()"><i class="bi bi-gear"></i> Change Password</a>
+
+      <button type="button" class="theme-toggle-item" (click)="toggleTheme()">
+        <i class="bi" [class.bi-moon-stars]="!isDarkMode()" [class.bi-sun]="isDarkMode()"></i>
+        {{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}
+      </button>
+
+      <button type="button" class="logout-item" (click)="logout()"><i class="bi bi-box-arrow-right"></i> Logout</button>
+    </div>
+  </div>
+</nav>

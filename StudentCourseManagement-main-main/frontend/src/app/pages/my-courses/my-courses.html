@@ -1,0 +1,327 @@
+<div class="my-courses-page">
+
+  <app-navbar></app-navbar>
+
+  <!-- ================= HEADER ================= -->
+
+  <section class="courses-header">
+
+    <div class="header-content">
+
+      <span class="section-label">
+        {{ isAdmin() ? 'COURSE MANAGEMENT' : 'MY LEARNING' }}
+      </span>
+
+      <h1>
+        My Courses
+      </h1>
+
+      <p *ngIf="isAdmin()">
+        All the courses you have added to the platform.
+      </p>
+
+      <p *ngIf="!isAdmin()">
+        Continue your learning journey and manage
+        the courses you're enrolled in.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= COURSES ================= -->
+
+  <section class="courses-section">
+
+    <!-- Loading -->
+
+    <div
+      class="loading"
+      *ngIf="loading"
+    >
+      <div class="loader"></div>
+      <span>Loading your courses...</span>
+    </div>
+
+
+    <!-- Error -->
+
+    <div
+      class="error-message"
+      *ngIf="errorMsg"
+    >
+      {{ errorMsg }}
+    </div>
+
+
+    <!-- ============ ADMIN VIEW ============ -->
+
+    <div
+      class="courses-grid"
+      *ngIf="isAdmin() && !loading && adminCourses.length > 0"
+    >
+
+      <div
+        class="course-card"
+        *ngFor="let course of adminCourses"
+      >
+
+        <div
+          class="course-card-header"
+          [class.has-image]="course.image"
+          [style.backgroundImage]="course.image ? 'linear-gradient(180deg, rgba(15,23,42,.15), rgba(15,23,42,.45)), url(' + course.image + ')' : null"
+        >
+
+          <span class="course-tag">
+            ADDED BY YOU
+          </span>
+
+          <span class="course-icon" *ngIf="!course.image">
+            📚
+          </span>
+
+        </div>
+
+
+        <div class="course-body">
+
+          <h3>
+            {{ course.title }}
+          </h3>
+
+          <p class="description">
+            {{ course.description }}
+          </p>
+
+
+          <div class="course-details">
+
+            <div class="detail">
+
+              <span class="detail-icon">
+                👨‍🏫
+              </span>
+
+              <div>
+                <small>Instructor</small>
+                <span>{{ course.instructor }}</span>
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span class="detail-icon">
+                ⏱
+              </span>
+
+              <div>
+                <small>Duration</small>
+                <span>{{ course.duration }}</span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="course-footer">
+
+            <strong>
+              {{ course.price }} EGP
+            </strong>
+
+            <div class="admin-actions">
+
+                            
+                <a routerLink="/courses"
+                [queryParams]="{ edit: course._id }"
+                class="view-btn">
+              
+                Update
+              </a>
+             
+              <button
+                type="button"
+                class="delete-btn"
+                (click)="deleteCourse(course._id)"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="no-courses"
+      *ngIf="isAdmin() && !loading && adminCourses.length === 0 && !errorMsg"
+    >
+
+      <div class="empty-icon">
+        📚
+      </div>
+
+      <h3>
+        No Courses Added Yet
+      </h3>
+
+      <p>
+        Start by adding your first course.
+      </p>
+
+      <button
+        type="button"
+        routerLink="/courses"
+        class="browse-btn"
+      >
+        Add a Course
+      </button>
+
+    </div>
+
+
+    <!-- ============ STUDENT VIEW ============ -->
+
+    <div
+      class="courses-grid"
+      *ngIf="!isAdmin() && !loading && items.length > 0"
+    >
+
+      <div
+        class="course-card"
+        *ngFor="let item of items"
+      >
+
+        <!-- Card Header -->
+
+        <div
+          class="course-card-header"
+          [class.has-image]="item.image"
+          [style.backgroundImage]="item.image ? 'linear-gradient(180deg, rgba(15,23,42,.15), rgba(15,23,42,.45)), url(' + item.image + ')' : null"
+        >
+
+          <span class="course-tag">
+            ENROLLED
+          </span>
+
+          <span class="course-icon" *ngIf="!item.image">
+            📚
+          </span>
+
+        </div>
+
+
+        <!-- Course Content -->
+
+        <div class="course-body">
+
+          <h3>
+            {{ item.title }}
+          </h3>
+
+          <p class="description">
+            {{ item.description }}
+          </p>
+
+
+          <!-- Course Details -->
+
+          <div class="course-details">
+
+            <div class="detail">
+
+              <span class="detail-icon">
+                👨‍🏫
+              </span>
+
+              <div>
+                <small>Instructor</small>
+                <span>{{ item.instructor }}</span>
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span class="detail-icon">
+                ⏱
+              </span>
+
+              <div>
+                <small>Duration</small>
+                <span>{{ item.duration }}</span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Footer -->
+
+          <div class="course-footer">
+
+            <strong>
+              {{ item.price }} EGP
+            </strong>
+
+            <button
+              type="button"
+              class="view-btn"
+            >
+              View Course
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- No Courses -->
+
+    <div
+      class="no-courses"
+      *ngIf="!isAdmin() && !loading && items.length === 0 && !errorMsg"
+    >
+
+      <div class="empty-icon">
+        📚
+      </div>
+ 
+      <h3>
+        No Courses Yet
+      </h3>
+
+      <p>
+        You haven't enrolled in any courses yet.
+        Start learning today!
+      </p>
+
+      <button
+        type="button"
+        routerLink="/courses"
+        class="browse-btn"
+      >
+        Browse Courses
+      </button>
+
+    </div>
+
+  </section>
+
+</div>

@@ -1,0 +1,138 @@
+<div class="dashboard">
+
+  
+  <app-navbar></app-navbar>
+
+    
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Welcome to Student Course Management
+      </h1>
+
+      <p>
+        Discover courses, learn new skills,
+        and manage your learning journey.
+      </p>
+
+
+     
+      <div class="search-box">
+
+        <input
+          type="text"
+          placeholder="Search for a course..."
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="searchCourses()"
+        >
+
+        <button
+          type="button"
+          (click)="searchCourses()"
+        >
+          Search
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+ 
+  <section class="courses-section">
+
+    <div class="section-header">
+
+      <h2>
+        Latest Courses
+      </h2>
+
+      <span>
+        {{ totalCourses }} Courses Available
+      </span>
+
+    </div>
+
+
+    
+    <div
+      class="loading"
+      *ngIf="loading"
+    >
+      Loading courses...
+    </div>
+
+
+    
+    <div
+      class="courses-grid"
+      *ngIf="!loading"
+    >
+
+      <div
+        class="course-card"
+        *ngFor="let course of courses"
+      >
+
+        <div class="course-content">
+
+          <h3>
+            {{ course.title }}
+          </h3>
+
+          <p>
+            {{ course.description }}
+          </p>
+
+
+          <div class="course-info">
+
+            <span>
+              👨‍🏫 {{ course.instructor }}
+            </span>
+
+            <span>
+              ⏱ {{ course.duration }}
+            </span>
+
+          </div>
+
+
+          <div class="course-bottom">
+
+            <strong>
+              {{ course.price }} EGP
+            </strong>
+
+            <a routerLink="/courses">
+              View Course
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    
+    <div
+      class="no-courses"
+      *ngIf="!loading && courses.length === 0"
+    >
+      No courses found.
+    </div>
+
+  </section>
+
+
+ 
+  <app-footer></app-footer>
+
+</div>

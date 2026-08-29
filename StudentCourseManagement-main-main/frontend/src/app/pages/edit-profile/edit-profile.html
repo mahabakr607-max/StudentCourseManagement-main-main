@@ -1,0 +1,187 @@
+<div class="edit-profile-page">
+<app-navbar></app-navbar>
+  <div class="edit-profile-container">
+
+    <div class="page-header">
+
+      <h1>Edit Profile</h1>
+
+      <p>
+        Update your personal information
+      </p>
+
+    </div>
+
+
+    <!-- Loading -->
+
+    <div
+      *ngIf="loading"
+      class="loading"
+    >
+      <i class="bi bi-arrow-repeat"></i>
+      Loading profile...
+    </div>
+
+
+    <!-- Form -->
+
+    <div
+      *ngIf="!loading"
+      class="edit-card"
+    >
+
+      <div
+        *ngIf="msg"
+        class="success-message"
+      >
+        <i class="bi bi-check-circle"></i>
+        {{ msg }}
+      </div>
+
+
+      <div
+        *ngIf="errorMsg"
+        class="error-message"
+      >
+        <i class="bi bi-exclamation-circle"></i>
+        {{ errorMsg }}
+      </div>
+
+
+      <!-- ============ Avatar Upload ============ -->
+
+      <div class="avatar-section">
+
+        <div class="avatar-preview">
+
+          <img
+            *ngIf="avatarPreview"
+            [src]="avatarPreview"
+          >
+
+          <div
+            *ngIf="!avatarPreview"
+            class="avatar-placeholder-big"
+          >
+            {{ (formData.name || 'U').charAt(0).toUpperCase() }}
+          </div>
+
+        </div>
+
+        <div class="avatar-actions">
+
+          <label class="upload-btn">
+            <i class="bi bi-camera"></i>
+            Change Photo
+            <input
+              type="file"
+              accept="image/*"
+              (change)="onAvatarSelected($event)"
+              hidden
+            >
+          </label>
+
+          <button
+            type="button"
+            class="remove-btn"
+            *ngIf="avatarPreview"
+            (click)="removeAvatar()"
+          >
+            <i class="bi bi-trash"></i>
+            Remove
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <form
+        (ngSubmit)="onSubmit()"
+      >
+
+        <div class="input-group">
+
+          <label>Name</label>
+
+          <input
+            type="text"
+            [(ngModel)]="formData.name"
+            name="name"
+            required
+            #nameInput
+            (keydown.enter)="$event.preventDefault(); emailInput.focus()"
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Email</label>
+
+          <input
+            type="email"
+            [(ngModel)]="formData.email"
+            name="email"
+            required
+            #emailInput
+            (keydown.enter)="$event.preventDefault(); ageInput.focus()"
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Age</label>
+
+          <input
+            type="number"
+            [(ngModel)]="formData.age"
+            name="age"
+            min="16"
+            max="100"
+            required
+            #ageInput
+          >
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="save-btn"
+            [disabled]="saving"
+          >
+
+            <i
+              class="bi"
+              [class.bi-check-lg]="!saving"
+              [class.bi-arrow-repeat]="saving"
+            ></i>
+
+            {{ saving ? 'Saving...' : 'Save Changes' }}
+
+          </button>
+
+
+          
+           <a routerLink="/home"
+            class="cancel-btn"
+          >
+            Cancel
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

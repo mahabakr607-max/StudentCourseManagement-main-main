@@ -1,0 +1,327 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/* =====================================================================
+   DARK MODE
+   الكلاس ده بيتضاف على الـ <body> من الـ ThemeService لما اليوزر
+   يختار Dark Mode من المينيو بروفايل، وبيتشال لما يختار Light Mode.
+   الاختيار بيتحفظ في localStorage فيفضل ثابت حتى لو عمل refresh.
+   ===================================================================== */
+
+body.dark-theme {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+/* ---------------- Page wrappers ---------------- */
+
+body.dark-theme .courses-page,
+body.dark-theme .profile-page,
+body.dark-theme .edit-profile-page,
+body.dark-theme .change-password-page,
+body.dark-theme .dashboard,
+body.dark-theme .home-page,
+body.dark-theme .my-courses-page {
+  background: #0f172a !important;
+  color: #fffcff !important;
+}
+
+body.dark-theme .container-fluid.min-vh-100 {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+/* عناوين/فقرات كانت متلونة بلون ثابت (مش وارثة من الأب) */
+
+body.dark-theme .page-header h1,
+body.dark-theme .profile-header h1,
+body.dark-theme .course-content h2,
+body.dark-theme .course-body h3 {
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .page-header p,
+body.dark-theme .profile-header p,
+body.dark-theme .course-description,
+body.dark-theme .info-content span,
+body.dark-theme .empty-state,
+body.dark-theme .empty-state h2,
+body.dark-theme .no-courses h3,
+body.dark-theme .no-courses p,
+body.dark-theme .loading,
+body.dark-theme .description,
+body.dark-theme .detail small,
+body.dark-theme .section-header span {
+  color: #ffffff !important;
+}
+
+/* ---------------- Cards / surfaces ---------------- */
+
+body.dark-theme .course-card,
+body.dark-theme .course-form-container,
+body.dark-theme .feature-card,
+body.dark-theme .edit-card,
+body.dark-theme .password-card,
+body.dark-theme .profile-card,
+body.dark-theme .course-modal,
+body.dark-theme .no-courses,
+body.dark-theme .loading,
+body.dark-theme .card {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark-theme .course-card {
+  border-color: #334155 !important;
+}
+
+body.dark-theme .course-card-header:not(.has-image) {
+  background: linear-gradient(135deg, #1e3a5f, #1e293b) !important;
+}
+
+body.dark-theme .course-icon,
+body.dark-theme .detail-icon,
+body.dark-theme .empty-icon,
+body.dark-theme .course-image-placeholder,
+body.dark-theme .course-modal-image,
+body.dark-theme .profile-avatar,
+body.dark-theme .info-icon,
+body.dark-theme .page-header .icon {
+  background: #334155 !important;
+}
+
+body.dark-theme .detail span {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .course-details,
+body.dark-theme .info-row,
+body.dark-theme .course-bottom,
+body.dark-theme .course-modal-footer,
+body.dark-theme .avatar-section,
+body.dark-theme .avatar-preview {
+  border-color: #334155 !important;
+}
+
+body.dark-theme .course-details {
+  color: #cbd5e1 !important;
+}
+
+/* اسم/إيميل/سن/role في صفحة البروفايل كانوا بلون غامق ثابت */
+body.dark-theme .info-content strong {
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .feature-card p {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .dropdown-avatar-fallback {
+  background: #334155 !important;
+  color: #93c5fd !important;
+}
+
+/* ---------------- Inputs / forms ---------------- */
+
+body.dark-theme .input-group input,
+body.dark-theme .input-group textarea,
+body.dark-theme .form-control,
+body.dark-theme .search-box input {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-theme .input-group input::placeholder,
+body.dark-theme .input-group textarea::placeholder,
+body.dark-theme .form-control::placeholder {
+  color: #64748b !important;
+}
+
+body.dark-theme .input-group label,
+body.dark-theme .form-label {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .input-group small {
+  color: #64748b !important;
+}
+
+body.dark-theme .input-group-text.bg-white {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #fdfeff !important;
+}
+
+/* ---------------- Buttons with light backgrounds ---------------- */
+
+body.dark-theme .cancel-btn,
+body.dark-theme .btn-secondary,
+body.dark-theme .close-btn {
+  background: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-theme .edit-btn {
+  background: #002fca !important;
+  color: #faf8f3 !important;
+}
+
+body.dark-theme .delete-btn {
+  background: #4a1f22 !important;
+  color: #f87171 !important;
+  border-color: #7f1d1d !important;
+}
+
+body.dark-theme .back-btn,
+body.dark-theme .profile-btn {
+  background: #1e293b !important;
+  color: #60a5fa !important;
+}
+
+body.dark-theme .back-btn:hover,
+body.dark-theme .profile-btn:hover {
+  background: #334155 !important;
+}
+
+body.dark-theme .btn.btn-outline-secondary {
+  color: #cbd5e1 !important;
+  border-color: #475569 !important;
+}
+
+/* ---------------- Navbar / profile dropdown ---------------- */
+
+body.dark-theme .navbar {
+  background: #1e293b !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-theme .nav-links a {
+  color: #f8f8f8 !important;
+}
+
+body.dark-theme .profile-dropdown {
+  background: #1e293b !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.dark-theme .dropdown-header {
+  border-color: #334155 !important;
+}
+
+body.dark-theme .dropdown-user-info strong {
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .dropdown-user-info small {
+  color: #f8f9fa !important;
+}
+
+body.dark-theme .profile-dropdown a,
+body.dark-theme .profile-dropdown .theme-toggle-item {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .profile-dropdown .logout-item {
+  border-color: #334155 !important;
+}
+
+/* ---------------- Modal ---------------- */
+
+body.dark-theme .course-modal-close {
+  background: rgba(30, 41, 59, 0.9) !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-theme .course-modal-close:hover {
+  background: #334155 !important;
+}
+
+body.dark-theme .course-modal-description,
+body.dark-theme .course-modal-details {
+  color: #c0cbdb !important;
+}
+
+/* ---------------- Bootstrap text helpers (login/register) ---------------- */
+
+body.dark-theme .text-muted {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .badge.bg-light {
+  background: #334155 !important;
+  color: #93c5fd !important;
+}
+
+/* الجزء الأبيض (bg-light) بتاع فورم اللوجين/ريجستر كان فاضل فاتح
+   في الدارك مود، فالكلام اللي جواه (Welcome Back, Create Account...)
+   كان بيتلون بلون فاتح على خلفية فاتحة = مش باين خالص */
+body.dark-theme .bg-light {
+  background-color: #0f172a !important;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6 {
+  color: #f1f5f9 !important;
+}
+
+/* ---------------- Alerts stay readable on dark backgrounds ---------------- */
+
+body.dark-theme .error-message {
+  background: #3f1518 !important;
+  border-color: #7f1d1d !important;
+  color: #fca5a5 !important;
+}
+
+body.dark-theme .success-message {
+  background: #113321 !important;
+  color: #86efac !important;
+}
+/* ---------------- Courses page (Add/Edit/Delete) extra fixes ---------------- */
+
+body.dark-theme .form-header h2 {
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .course-info div {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .empty-state h2 {
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .courses-container {
+  background: transparent !important;
+}
+
+/* ---------------- Home page course cards + search box ---------------- */
+
+body.dark-theme .home-page .course-body p,
+body.dark-theme .home-page .course-details span,
+body.dark-theme .dashboard .course-content p,
+body.dark-theme .dashboard .course-info {
+  color: #cbd5e1 !important;
+}
+
+/* الـ course-tag هنا شفاف فاتح (chip) مش شيلد زرقاء زي my-courses
+   فمحتاج يتلون غامق عشان الخط الأزرق يبان عليه */
+body.dark-theme .home-page .course-tag {
+  background: #1e3a5f !important;
+  color: #93c5fd !important;
+}
+
+body.dark-theme .search-box {
+  background: #1e293b !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark-theme .search-box input {
+  color: #e2e8f0 !important;
+}

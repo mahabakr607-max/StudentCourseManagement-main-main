@@ -1,0 +1,336 @@
+<div class="courses-page">
+<app-navbar></app-navbar>
+  <div class="page-header">
+
+    <div>
+      <h1>Courses</h1>
+
+      <p>
+        Explore our available courses
+      </p>
+    </div>
+
+
+    <button
+      *ngIf="isAdmin()"
+      class="add-course-btn"
+      type="button"
+      (click)="openAddForm()"
+    >
+
+      <i class="bi bi-plus-lg"></i>
+
+      Add Course
+
+    </button>
+
+  </div>
+
+
+  <!-- Add / Update -->
+
+  <div
+    *ngIf="showForm"
+    id="courseFormSection"
+    class="course-form-container"
+  >
+
+    <div class="form-header">
+
+      <h2>
+        {{ editMode ? 'Update Course' : 'Add New Course' }}
+      </h2>
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeForm()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="input-group">
+
+        <label>Course Title</label>
+
+        <input
+          type="text"
+          [(ngModel)]="course.title"
+          placeholder="Enter course title"
+          #titleInput
+          (keydown.enter)="$event.preventDefault(); instructorInput.focus()"
+        >
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>Instructor</label>
+
+        <input
+          type="text"
+          [(ngModel)]="course.instructor"
+          placeholder="Enter instructor name"
+          #instructorInput
+          (keydown.enter)="$event.preventDefault(); descriptionInput.focus()"
+        >
+
+      </div>
+
+
+      <div class="input-group full-width">
+
+        <label>Description</label>
+
+        <textarea
+          [(ngModel)]="course.description"
+          placeholder="Enter course description"
+          #descriptionInput
+        ></textarea>
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>Price</label>
+
+        <input
+          type="number"
+          [(ngModel)]="course.price"
+          placeholder="Enter price"
+          #priceInput
+          (keydown.enter)="$event.preventDefault(); durationInput.focus()"
+        >
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>Duration</label>
+
+        <input
+          type="text"
+          [(ngModel)]="course.duration"
+          placeholder="Example: 3 Months"
+          #durationInput
+          (keydown.enter)="$event.preventDefault(); imageInput.focus()"
+        >
+
+      </div>
+
+
+      <div class="input-group full-width">
+
+        <label>Course Image URL</label>
+
+        <input
+          type="url"
+          [(ngModel)]="course.image"
+          placeholder="Paste image URL"
+          #imageInput
+          (keydown.enter)="$event.preventDefault(); saveCourse()"
+        >
+
+        <small>
+          Example:
+          https://images.unsplash.com/...
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="saveCourse()"
+      >
+
+        <i
+          class="bi"
+          [class.bi-plus-lg]="!editMode"
+          [class.bi-check-lg]="editMode"
+        ></i>
+
+        {{ editMode ? 'Update Course' : 'Add Course' }}
+
+      </button>
+
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeForm()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Courses -->
+
+  <div class="courses-container">
+
+    <div
+      *ngFor="let course of courses"
+      class="course-card"
+    >
+
+      <!-- Image -->
+
+      <div class="course-image">
+
+        <img
+          *ngIf="course.image"
+          [src]="course.image"
+          [alt]="course.title"
+        >
+
+        <div
+          *ngIf="!course.image"
+          class="course-image-placeholder"
+        >
+          <i class="bi bi-book"></i>
+        </div>
+
+      </div>
+
+
+      <!-- Content -->
+
+      <div class="course-content">
+
+        <h2>
+          {{ course.title }}
+        </h2>
+
+
+        <p class="course-description">
+          {{ course.description }}
+        </p>
+
+
+        <div class="course-info">
+
+          <div>
+
+            <i class="bi bi-person"></i>
+
+            <span>
+              {{ course.instructor }}
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i class="bi bi-clock"></i>
+
+            <span>
+              {{ course.duration }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="course-bottom">
+
+          <div class="price">
+            {{ course.price }} EGP
+          </div>
+
+
+          <!-- Admin -->
+
+          <div
+            *ngIf="isAdmin()"
+            class="admin-actions"
+          >
+
+            <button
+              type="button"
+              class="edit-btn"
+              (click)="openEditForm(course)"
+            >
+
+              <i class="bi bi-pencil"></i>
+
+              Manage
+
+            </button>
+
+
+            <button
+              type="button"
+              class="delete-btn"
+              (click)="deleteCourse(course._id)"
+            >
+
+              <i class="bi bi-trash"></i>
+
+              Delete
+
+            </button>
+
+          </div>
+
+
+          <!-- Student -->
+
+          <button
+            *ngIf="!isAdmin()"
+            type="button"
+            class="enroll-btn"
+            (click)="addToMyCourses(course)"
+          >
+
+            <i class="bi bi-plus-circle"></i>
+
+            Add to My Courses
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Empty -->
+
+  <div
+    *ngIf="courses.length === 0"
+    class="empty-state"
+  >
+
+    <i class="bi bi-book"></i>
+
+    <h2>No Courses Available</h2>
+
+    <p>
+      There are no courses available right now.
+    </p>
+
+  </div>
+
+</div>

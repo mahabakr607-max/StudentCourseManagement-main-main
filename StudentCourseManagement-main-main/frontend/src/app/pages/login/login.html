@@ -1,0 +1,211 @@
+<div class="container-fluid min-vh-100">
+
+  <div class="row min-vh-100">
+
+    <!-- Left Side -->
+    <div class="col-lg-6 d-none d-lg-flex bg-primary text-white
+             align-items-center justify-content-center">
+
+      <div class="text-center px-5">
+
+        <i class="bi bi-mortarboard-fill display-1 mb-4"></i>
+
+        <h1 class="fw-bold display-5">
+          Course Platform
+        </h1>
+
+        <p class="lead mt-3">
+          Learn new skills and continue your journey with us.
+        </p>
+
+        <div class="mt-4">
+
+          <span class="badge bg-light text-primary fs-6 me-2 p-2">
+            <i class="bi bi-book me-1"></i>
+            Courses
+          </span>
+
+          <span class="badge bg-light text-primary fs-6 p-2">
+            <i class="bi bi-award me-1"></i>
+            Certificates
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="col-12 col-lg-6 d-flex
+             align-items-center justify-content-center
+             bg-light">
+
+      <div class="w-100 px-4" style="max-width: 450px;">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+
+          <div class="bg-primary text-white rounded-circle
+                   d-inline-flex align-items-center
+                   justify-content-center mb-3"
+               style="width: 65px; height: 65px;">
+
+            <i class="bi bi-person fs-2"></i>
+
+          </div>
+
+          <h2 class="fw-bold">
+            Welcome Back
+          </h2>
+
+          <p class="text-muted">
+            Login to your account
+          </p>
+
+        </div>
+
+        <!-- Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+          <!-- Email -->
+          <div class="mb-4">
+
+            <label class="form-label fw-semibold">
+              Email
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-envelope text-primary"></i>
+              </span>
+
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Enter your email"
+                #emailInput
+                (keydown.enter)="$event.preventDefault(); passwordInput.focus()">
+
+            </div>
+
+            <div
+              class="text-danger mt-1"
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                loginForm.get('email')?.touched
+              ">
+
+              <small
+                *ngIf="
+                  loginForm.get('email')?.errors?.['required']
+                ">
+                Email is required
+              </small>
+
+              <small
+                *ngIf="
+                  loginForm.get('email')?.errors?.['email']
+                ">
+                Enter a valid email
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+
+            <label class="form-label fw-semibold">
+              Password
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text bg-white">
+                <i class="bi bi-lock text-primary"></i>
+              </span>
+
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                formControlName="password"
+                placeholder="Enter your password"
+                #passwordInput>
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="togglePassword()">
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!showPassword"
+                  [class.bi-eye-slash]="showPassword">
+                </i>
+
+              </button>
+
+            </div>
+
+            <div
+              class="text-danger mt-1"
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              ">
+
+              <small
+                *ngIf="
+                  loginForm.get('password')?.errors?.['required']
+                ">
+                Password is required
+              </small>
+
+              <small
+                *ngIf="
+                  loginForm.get('password')?.errors?.['minlength']
+                ">
+                Password must be at least 6 characters
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- Login -->
+          <button
+            type="submit"
+            class="btn btn-primary w-100 py-2 fw-semibold"
+            [disabled]="loginForm.invalid">
+
+            <i class="bi bi-box-arrow-in-right me-2"></i>
+            Login
+
+          </button>
+
+          <!-- Register -->
+          <p class="text-center text-muted mt-4">
+
+            Don't have an account?
+
+            
+              <a routerLink="/register"
+              class="text-primary fw-semibold text-decoration-none">
+              Register
+            </a>
+
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

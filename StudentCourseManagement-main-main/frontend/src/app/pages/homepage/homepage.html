@@ -1,0 +1,384 @@
+<div class="home-page">
+
+  <!-- ================= NAVBAR ================= -->
+
+  <app-navbar></app-navbar>
+
+
+  <!-- ================= HERO ================= -->
+
+ <!-- ================= HERO ================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <span class="welcome">
+      Welcome to Student Course Management
+    </span>
+
+    <h1>
+      Learn New Skills.
+      <br>
+      Build Your Future.
+    </h1>
+
+    <p>
+      Discover courses, improve your skills,
+      and continue your learning journey.
+    </p>
+
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search for courses..."
+        (keyup.enter)="searchCourses()"
+      />
+
+      <button
+        type="button"
+        (click)="searchCourses()"
+      >
+        Search
+      </button>
+
+    </div>
+
+
+    <!-- Hero Buttons -->
+
+    <div class="hero-buttons">
+
+      <button
+        type="button"
+        class="primary-btn"
+        (click)="goToCourses()"
+      >
+        Browse Courses
+      </button>
+
+      <button
+        type="button"
+        class="secondary-btn"
+        (click)="goToMyCourses()"
+      >
+        My Courses
+      </button>
+
+      <button
+        type="button"
+        class="secondary-btn"
+        (click)="goToProfile()"
+      >
+        My Profile
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+  <!-- ================= FEATURES ================= -->
+
+  <section class="features">
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        📚
+      </div>
+
+      <h3>
+        Explore Courses
+      </h3>
+
+      <p>
+        Find courses that match your interests
+        and learning goals.
+      </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        🔍
+      </div>
+
+      <h3>
+        Search Easily
+      </h3>
+
+      <p>
+        Search for courses by title,
+        description, or instructor.
+      </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        🎓
+      </div>
+
+      <h3>
+        Keep Learning
+      </h3>
+
+      <p>
+        Enroll in courses and manage
+        your learning journey.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= COURSES ================= -->
+
+  <section class="courses-section" id="coursesResults">
+
+    <div class="section-title">
+
+      <div>
+
+        <span class="section-label">
+          OUR COURSES
+        </span>
+
+        <h2>
+          Popular Courses
+        </h2>
+
+      </div>
+
+      <button
+        type="button"
+        class="view-all"
+        (click)="goToCourses()"
+      >
+        View All Courses →
+      </button>
+
+    </div>
+
+
+    <!-- Loading -->
+
+    <div
+      class="loading"
+      *ngIf="loading"
+    >
+      Loading courses...
+    </div>
+
+
+    <!-- Courses -->
+
+    <div
+      class="courses-grid"
+      *ngIf="!loading && courses.length > 0"
+    >
+
+      <div
+        class="course-card"
+        *ngFor="let course of courses | slice:0:6"
+      >
+
+        <div class="course-body">
+
+          <span class="course-tag">
+            Course
+          </span>
+
+          <h3>
+            {{ course.title }}
+          </h3>
+
+          <p>
+            {{ course.description }}
+          </p>
+
+          <div class="course-details">
+
+            <span>
+              👨‍🏫 {{ course.instructor }}
+            </span>
+
+            <span>
+              ⏱ {{ course.duration }}
+            </span>
+
+          </div>
+
+          <div class="course-footer">
+
+            <strong>
+              {{ course.price }} EGP
+            </strong>
+
+            <button
+              type="button"
+              (click)="viewCourse(course)"
+            >
+              View Course
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- No Courses -->
+
+    <div
+      class="no-courses"
+      *ngIf="!loading && courses.length === 0"
+    >
+
+      <h3>
+        No courses available
+      </h3>
+
+      <p>
+        There are no courses to display right now.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= COURSE DETAILS MODAL ================= -->
+
+  <div
+    class="course-modal-overlay"
+    *ngIf="showCourseModal && selectedCourse"
+    (click)="closeCourseModal()"
+  >
+
+    <div
+      class="course-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <button
+        type="button"
+        class="course-modal-close"
+        (click)="closeCourseModal()"
+      >
+        ×
+      </button>
+
+      <div class="course-modal-image">
+
+        <img
+          *ngIf="selectedCourse.image"
+          [src]="selectedCourse.image"
+          [alt]="selectedCourse.title"
+        >
+
+        <div
+          *ngIf="!selectedCourse.image"
+          class="course-modal-image-placeholder"
+        >
+          <i class="bi bi-book"></i>
+        </div>
+
+      </div>
+
+      <div class="course-modal-body">
+
+        <span class="course-tag">
+          Course
+        </span>
+
+        <h2>
+          {{ selectedCourse.title }}
+        </h2>
+
+        <p class="course-modal-description">
+          {{ selectedCourse.description }}
+        </p>
+
+        <div class="course-modal-details">
+
+          <span>
+            👨‍🏫 {{ selectedCourse.instructor }}
+          </span>
+
+          <span>
+            ⏱ {{ selectedCourse.duration }}
+          </span>
+
+        </div>
+
+        <div class="course-modal-footer">
+
+          <strong>
+            {{ selectedCourse.price }} EGP
+          </strong>
+
+          <button
+            type="button"
+            (click)="handleModalAction()"
+          >
+            {{ isAdmin() ? 'Update' : 'Enroll' }}
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= CALL TO ACTION ================= -->
+
+  <section class="cta">
+
+    <div class="cta-content">
+
+      <h2>
+        Ready to Start Learning?
+      </h2>
+
+      <p>
+        Explore our courses and start building
+        new skills today.
+      </p>
+
+      <button
+        type="button"
+        (click)="goToCourses()"
+      >
+        Explore Courses
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <app-footer></app-footer>
+
+</div>

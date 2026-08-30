@@ -1,12 +1,14 @@
 # Student Course Management System
 
-A web-based **Student Course Management System** that allows students and instructors to manage courses, user accounts, enrollment, and course-related information through an **Angular frontend** integrated with a backend API.
+A full-stack web application designed to simplify course management and student enrollment through a modern **Angular frontend** integrated with a **Node.js / Express.js backend** and **MongoDB** database.
 
 ## 📌 Project Overview
 
-The Student Course Management System is designed to simplify the process of managing educational courses online.
+The Student Course Management System provides a centralized platform for managing courses, users, profiles, and enrollments.
 
-Students can create accounts, log in, browse available courses, enroll in courses, and manage their profiles. Instructors or administrators can manage courses and student-related information.
+Students can register, log in, browse available courses, enroll in courses, and manage their profiles and enrolled courses.
+
+Administrators can manage courses and access student-related information through protected features.
 
 ## 🚀 Features
 
@@ -14,12 +16,13 @@ Students can create accounts, log in, browse available courses, enroll in course
 * 👤 User Profile Management
 * 📚 Browse Available Courses
 * ➕ Course Enrollment
-* 🎓 Manage My Courses
+* 🎓 My Courses
 * 🔑 Authentication & Authorization
-* 🛡️ Auth Guards for Protected Routes
-* 🌐 REST API Integration
+* 🛡️ Protected Routes
+* 🌐 RESTful API Integration
 * 📱 Responsive User Interface
-* 🔄 CRUD Operations for Courses and Users
+* 🔄 CRUD Operations
+* 👨‍💼 Admin Course Management
 
 ## 🛠️ Technologies Used
 
@@ -37,66 +40,71 @@ Students can create accounts, log in, browse available courses, enroll in course
 * Express.js
 * REST API
 * MongoDB
+* Mongoose
 
 ### Development Tools
 
 * Visual Studio Code
 * Postman
-* Git & GitHub
+* Git
+* GitHub
 
 ## 🏗️ Project Structure
 
 ```text
 StudentCourseManagement/
 │
-├── Frontend/
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── components/
-│   │   │   ├── services/
-│   │   │   ├── guards/
-│   │   │   └── ...
-│   │   └── ...
-│
 ├── Backend/
 │   ├── controllers/
+│   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── middleware/
-│   ├── config/
-│   └── index.js
+│   ├── index.js
+│   └── ...
 │
-└── README.md
+├── frontend/
+│   ├── src/
+│   │   └── app/
+│   │       ├── pages/
+│   │       ├── services/
+│   │       ├── interceptors/
+│   │       └── ...
+│   ├── angular.json
+│   └── package.json
+│
+├── .gitignore
+├── README.md
+└── package-lock.json
 ```
 
 ## 🔑 Authentication
 
-The application uses authentication to protect user information and restricted pages.
+The application uses authentication and authorization mechanisms to protect user accounts and restricted features.
 
-After login, the authentication token is stored on the client side and sent with API requests using the `Authorization` header.
+Authentication tokens are sent with API requests using the `Authorization` header.
 
 ```text
 Authorization: Bearer <token>
 ```
 
-Protected routes are handled using Angular Route Guards.
+Protected frontend routes are handled through Angular route protection.
 
 ## 📚 Course Management
 
-The system provides course management functionality including:
+The system supports core course management operations, including:
 
 * Create courses
-* View courses
+* View available courses
 * Update course information
 * Delete courses
-* View enrolled courses
 * Enroll students in courses
+* View enrolled courses
 
 ## 🔌 API Integration
 
 The Angular frontend communicates with the backend through RESTful API endpoints.
 
-Example:
+Example course endpoints:
 
 ```text
 GET     /courses
@@ -111,18 +119,19 @@ DELETE  /courses/:id
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/IbrahimJamal1/StudentCourseManagement.git
+git clone https://github.com/mahabakr607-max/StudentCourseManagement-main-main.git
 ```
 
 ### 2. Navigate to the Project
 
 ```bash
-cd StudentCourseManagement
+cd StudentCourseManagement-main-main
 ```
 
 ### 3. Install Frontend Dependencies
 
 ```bash
+cd frontend
 npm install
 ```
 
@@ -140,19 +149,14 @@ http://localhost:4200
 
 ### 5. Run the Backend
 
-Navigate to the backend folder and install dependencies:
+Open another terminal and navigate to the backend:
 
 ```bash
+cd Backend
 npm install
 ```
 
 Then start the server:
-
-```bash
-npm start
-```
-
-or:
 
 ```bash
 node index.js
@@ -160,7 +164,9 @@ node index.js
 
 ## 🔒 Environment Variables
 
-Create a `.env` or configuration file for sensitive information such as:
+Create a `.env` file inside the backend directory with your local configuration.
+
+Example:
 
 ```text
 PORT=5000
@@ -168,15 +174,13 @@ MONGO_URL=your_mongodb_connection_string
 SECRET_KEY=your_secret_key
 ```
 
-Do not upload real credentials or secret keys to GitHub.
+**Do not upload real credentials, passwords, connection strings, or secret keys to GitHub.**
 
-## 👨‍💻 Author
+## 👩‍💻 Author
 
-**Ibrahim Gamal Ibrahim**
+**Maha Refaat Abdulaziz**
 
-Computer Science Student
-Faculty of Computers & Artificial Intelligence
-Benha University
+Management Information Systems (MIS) Student
 
 ## 📄 License
 
